@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TaskFlow — Modern project management tool for teams. Organize tasks with boards, lists, and drag-and-drop.">
+  <title>TaskFlow — Sign In</title>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/auth.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+  <div class="auth-container page-enter">
+
+    <!-- Left Panel — Branding -->
+    <div class="auth-branding">
+      <div class="floating-shapes">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+        <div class="floating-shape shape-4"></div>
+      </div>
+
+      <div class="branding-content">
+        <div class="branding-logo">
+          <div class="branding-logo-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+          </div>
+          <span class="branding-logo-text">Task<span class="text-gradient">Flow</span></span>
+        </div>
+
+        <h1 class="branding-headline">
+          Manage Projects,<br>
+          <span class="text-gradient">Effortlessly.</span>
+        </h1>
+
+        <p class="branding-subtext">
+          Organize your work with intuitive boards, drag-and-drop task management, and real-time team collaboration.
+        </p>
+
+        <div class="branding-features">
+          <div class="branding-feature">
+            <div class="branding-feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+              </svg>
+            </div>
+            <span class="branding-feature-text">Kanban boards with customizable columns</span>
+          </div>
+          <div class="branding-feature">
+            <div class="branding-feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+              </svg>
+            </div>
+            <span class="branding-feature-text">Drag-and-drop task prioritization</span>
+          </div>
+          <div class="branding-feature">
+            <div class="branding-feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+              </svg>
+            </div>
+            <span class="branding-feature-text">Real-time collaboration with your team</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Panel — Auth Form -->
+    <div class="auth-form-panel">
+      <div class="auth-card">
+        <h2 class="auth-card-title">Welcome</h2>
+        <p class="auth-card-subtitle">Sign in to manage your projects</p>
+
+        <!-- Tab Switcher -->
+        <div class="auth-tabs">
+          <button class="auth-tab active" id="login-tab">Log In</button>
+          <button class="auth-tab" id="signup-tab">Sign Up</button>
+        </div>
+
+        <!-- Login Form -->
+        <form class="auth-form active" id="login-form">
+          <div class="form-group">
+            <label class="form-label" for="login-email">Email Address</label>
+            <input class="form-input" type="email" id="login-email" placeholder="you@example.com" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="login-password">Password</label>
+            <input class="form-input" type="password" id="login-password" placeholder="Enter your password" required autocomplete="current-password">
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg auth-submit">
+            Log In
+          </button>
+        </form>
+
+        <!-- Signup Form -->
+        <form class="auth-form" id="signup-form">
+          <div class="form-group">
+            <label class="form-label" for="signup-name">Full Name</label>
+            <input class="form-input" type="text" id="signup-name" placeholder="John Doe" required autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="signup-email">Email Address</label>
+            <input class="form-input" type="email" id="signup-email" placeholder="you@example.com" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="signup-password">Password</label>
+            <input class="form-input" type="password" id="signup-password" placeholder="Create a password (min 4 chars)" required minlength="4" autocomplete="new-password">
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg auth-submit">
+            Create Account
+          </button>
+        </form>
+
+        <div class="auth-divider">Demo — data stored locally</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="js/utils.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/modal.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

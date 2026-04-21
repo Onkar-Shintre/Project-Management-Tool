@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TaskFlow Board — Manage lists and tasks with drag-and-drop.">
+  <title>TaskFlow — Board</title>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/board.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+  <div class="board-layout">
+
+    <!-- Board Header / Navbar -->
+    <header class="board-header">
+      <div class="board-header-left">
+        <button class="board-back-btn" id="board-back-btn" aria-label="Back to dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+        </button>
+
+        <a href="app.html" class="navbar-logo" style="margin-right: var(--space-4);">
+          <div class="navbar-logo-icon" style="width:30px;height:30px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+          </div>
+        </a>
+
+        <div class="board-title-wrap">
+          <input class="board-title" id="board-title" value="" spellcheck="false" maxlength="40">
+          <button class="board-star-btn" id="board-star-btn" aria-label="Star board">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="board-header-right">
+        <button class="btn btn-ghost btn-sm" id="board-delete-btn" data-tooltip="Delete board">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+          </svg>
+        </button>
+
+        <div class="dropdown">
+          <div class="navbar-user" id="board-user-toggle" style="cursor:pointer;">
+            <div class="avatar avatar-sm" id="navbar-user-avatar"></div>
+            <span class="navbar-user-name" id="navbar-user-name" style="font-size: var(--font-size-sm);"></span>
+          </div>
+          <div class="dropdown-menu" id="board-user-dropdown">
+            <button class="dropdown-item" onclick="window.location.href='app.html'">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/>
+              </svg>
+              All Boards
+            </button>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item dropdown-item--danger" id="logout-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
+              </svg>
+              Log Out
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Board Content — Horizontal Scrolling -->
+    <div class="board-content" id="board-content">
+
+      <!-- Lists will be rendered here dynamically -->
+
+      <!-- Add List Button -->
+      <button class="add-list-btn" id="add-list-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+        Add another list
+      </button>
+
+      <!-- Add List Form (hidden by default) -->
+      <div class="add-list-form" id="add-list-form">
+        <div class="add-list-form-inner">
+          <input class="add-list-input" id="add-list-input" placeholder="Enter list title..." maxlength="30">
+          <div class="add-list-actions">
+            <button class="btn btn-primary btn-sm" id="add-list-submit">Add List</button>
+            <button class="btn btn-ghost btn-sm" id="add-list-cancel">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Task Detail Overlay -->
+    <div class="task-detail-overlay" id="task-detail-overlay"></div>
+
+    <!-- Task Detail Sidebar -->
+    <div class="task-detail-panel" id="task-detail-panel">
+      <div class="task-detail-header">
+        <h3 style="font-size: var(--font-size-sm); color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 0.5px;">Task Details</h3>
+        <button class="task-detail-close" id="task-detail-close" aria-label="Close task details">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <div class="task-detail-body" id="task-detail-body">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="js/utils.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/modal.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/dragdrop.js"></script>
+  <script src="js/realtime.js"></script>
+  <script src="js/board.js"></script>
+
+  <!-- Board user dropdown toggle -->
+  <script>
+    document.getElementById('board-user-toggle')?.addEventListener('click', () => {
+      document.getElementById('board-user-dropdown')?.classList.toggle('active');
+    });
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('#board-user-toggle') && !e.target.closest('#board-user-dropdown')) {
+        document.getElementById('board-user-dropdown')?.classList.remove('active');
+      }
+    });
+  </script>
+</body>
+</html>
